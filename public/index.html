@@ -6,13 +6,13 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="stylesheet" href="styles.css">
+      <link id="theme-stylesheet" rel="stylesheet" href="light.css">
    </head>
    <body>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded" id="navbar">
          <a class="navbar-brand" href="#">Home </a>
          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-         <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon" id="toggler-icon"></span>
          </button>
          <div class="collapse navbar-collapse justify-content-end" id="navbarNav" style="margin-right: 70px;">
             <ul class="navbar-nav">
@@ -20,16 +20,8 @@
                   <a class="nav-link" href="/">Home <span class="sr-only">(current)</span>
                   </a>
                </li>
-               <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Features </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                     <a class="dropdown-item" href="#">Cookies Extractor</a>
-                     <div class="dropdown-divider"></div>
-                     <a class="dropdown-item" href="/step_by_step_guide">Step-by-Step Guide</a>
-                  </div>
-               </li>
                <li class="nav-item">
-                  <a class="nav-link" href="online_user">Active</a>
+                  <button class="btn btn-dark ml-3" id="theme-toggle-btn">Dark Mode</button>
                </li>
             </ul>
          </div>
@@ -84,6 +76,54 @@
          <p>Ping: <span id="ping"></span>
          </p>
       </div>
+      <script>
+         const toggleButton = document.getElementById("theme-toggle-btn");
+         const themeStylesheet = document.getElementById("theme-stylesheet");
+         const navbar = document.getElementById("navbar");
+         const togglerIcon = document.getElementById("toggler-icon");
+
+         const currentTheme = localStorage.getItem("theme") || "light";
+         themeStylesheet.href = `${currentTheme}.css`;
+
+         if (currentTheme === "dark") {
+            navbar.classList.replace("navbar-light", "navbar-dark");
+            navbar.classList.replace("bg-light", "bg-dark");
+            toggleButton.textContent = "Light Mode";
+            toggleButton.classList.remove("btn-light");
+            toggleButton.classList.add("btn-dark");
+            togglerIcon.style.filter = "invert(100%)";
+         } else {
+            navbar.classList.replace("navbar-dark", "navbar-light");
+            navbar.classList.replace("bg-dark", "bg-light");
+            toggleButton.textContent = "Dark Mode";
+            toggleButton.classList.remove("btn-dark");
+            toggleButton.classList.add("btn-light");
+            togglerIcon.style.filter = "invert(0%)";
+         }
+
+         toggleButton.addEventListener("click", () => {
+            const newTheme = themeStylesheet.href.includes("light.css") ? "dark" : "light";
+            themeStylesheet.href = `${newTheme}.css`;
+
+            if (newTheme === "dark") {
+               navbar.classList.replace("navbar-light", "navbar-dark");
+               navbar.classList.replace("bg-light", "bg-dark");
+               toggleButton.textContent = "Light Mode";
+               toggleButton.classList.remove("btn-light");
+               toggleButton.classList.add("btn-dark");
+               togglerIcon.style.filter = "invert(100%)";
+            } else {
+               navbar.classList.replace("navbar-dark", "navbar-light");
+               navbar.classList.replace("bg-dark", "bg-light");
+               toggleButton.textContent = "Dark Mode";
+               toggleButton.classList.remove("btn-dark");
+               toggleButton.classList.add("btn-light");
+               togglerIcon.style.filter = "invert(0%)";
+            }
+
+            localStorage.setItem("theme", newTheme);
+         });
+         </script>
       <script src="script.js"></script>
       <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
