@@ -15,23 +15,33 @@
             <span class="navbar-toggler-icon" id="toggler-icon"></span>
          </button>
          <div class="collapse navbar-collapse justify-content-end" id="navbarNav" style="margin-right: 70px;">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav me-auto">
                <li class="nav-item active">
                   <a class="nav-link" href="/">Home <span class="sr-only">(current)</span>
                   </a>
                </li>
-               <li class="nav-item">
-                  <button class="btn btn-dark ml-3" id="theme-toggle-btn">Dark Mode</button>
+               <li class="nav-item dropdown">
+                  <a class="nav-link disabled dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Features </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                     <a class="dropdown-item" href="#">Cookies Extractor</a>
+                     <div class="dropdown-divider"></div>
+                     <a class="dropdown-item" href="/step_by_step_guide">Step-by-Step Guide</a>
+                  </div>
                </li>
             </ul>
          </div>
       </nav>
       <div class="container">
+         <div>
+             <button class="btn btn-success ml-auto d-block" id="theme-toggle-btn" style="float: right;">
+                 <i id="theme-icon" class="fas fa-moon"></i>
+             </button>
+         </div>
          <h1 class="col text-center" style="font-size: 20px; padding: 10px;">GPT - 4</h1>
          <form id="json-form" onsubmit="submitForm(event)">
             <div class="row">
                <div class="col-md-12">
-                  <textarea id="json-data" class="form-control centered-textarea center-placeholder" placeholder=""></textarea>
+                  <textarea id="json-data" class="form-control centered-textarea center-placeholder" placeholder="Appstate..."></textarea>
                </div>
             </div>
          </form>
@@ -78,6 +88,7 @@
       </div>
       <script>
          const toggleButton = document.getElementById("theme-toggle-btn");
+         const themeIcon = document.getElementById("theme-icon");
          const themeStylesheet = document.getElementById("theme-stylesheet");
          const navbar = document.getElementById("navbar");
          const togglerIcon = document.getElementById("toggler-icon");
@@ -88,14 +99,14 @@
          if (currentTheme === "dark") {
             navbar.classList.replace("navbar-light", "navbar-dark");
             navbar.classList.replace("bg-light", "bg-dark");
-            toggleButton.textContent = "Light Mode";
+            themeIcon.classList.replace("fa-moon", "fa-sun");
             toggleButton.classList.remove("btn-light");
             toggleButton.classList.add("btn-dark");
             togglerIcon.style.filter = "invert(100%)";
          } else {
             navbar.classList.replace("navbar-dark", "navbar-light");
             navbar.classList.replace("bg-dark", "bg-light");
-            toggleButton.textContent = "Dark Mode";
+            themeIcon.classList.replace("fa-sun", "fa-moon");
             toggleButton.classList.remove("btn-dark");
             toggleButton.classList.add("btn-light");
             togglerIcon.style.filter = "invert(0%)";
@@ -108,14 +119,14 @@
             if (newTheme === "dark") {
                navbar.classList.replace("navbar-light", "navbar-dark");
                navbar.classList.replace("bg-light", "bg-dark");
-               toggleButton.textContent = "Light Mode";
+               themeIcon.classList.replace("fa-moon", "fa-sun");
                toggleButton.classList.remove("btn-light");
                toggleButton.classList.add("btn-dark");
                togglerIcon.style.filter = "invert(100%)";
             } else {
                navbar.classList.replace("navbar-dark", "navbar-light");
                navbar.classList.replace("bg-dark", "bg-light");
-               toggleButton.textContent = "Dark Mode";
+               themeIcon.classList.replace("fa-sun", "fa-moon");
                toggleButton.classList.remove("btn-dark");
                toggleButton.classList.add("btn-light");
                togglerIcon.style.filter = "invert(0%)";
